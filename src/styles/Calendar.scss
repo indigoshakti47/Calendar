@@ -1,14 +1,49 @@
+@import 'variables.scss';
 .App-header {
     display: flex;
     justify-content: center;
     align-self: center;
 }
 .calendar {
-    display: grid;
-    grid-template-columns: repeat(7,80px);
-    gap: 8px;
+    display: flex;
+    align-items: center;
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(7,80px);
+        gap: 8px;
+    }
 }
-.calendar-header{
+.calendar-header {
     text-align: center;
     font-size: 16px;
+}
+.hover-icon {
+    margin-top: 120px;
+    transition: .3s;
+    color: $primary;
+    font-size: 38px;
+    cursor: pointer;
+    will-change: transform;
+    &:first-child {
+        margin-right: 50px;
+    }
+    &:last-child {
+        margin-left: 50px;
+    }
+    &:hover {
+        color:  darken($primary, 10%);
+        transform: scale(1.1);
+    }
+}
+.weekdays {
+    color: $primary;
+    font-weight: bold;
+    font-size: 20px;
+}
+.month {
+    grid-column-end: 8;
+    grid-column-start: 1;
+    font-size: 26px;
+    color: $dark;
+    margin-left: 16px;
 }

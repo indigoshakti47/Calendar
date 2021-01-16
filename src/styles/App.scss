@@ -1,3 +1,43 @@
-*{
-    background-color: #E9E9E9;
+@import './variables.scss';
+
+.App {
+  background-color: $bg-gray;
+  padding: 60px 60px;
+  height: 100vh;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin-left: 30px;
+}
+
+.double-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+  height: 700px;
+}
+
+.calendar-column {
+  border: 1px solid $white;
+  border-radius: 6px;
+  background-color: $white;
+  height: 100%;
+}
+
+.reminders-column {
+  border: 1px solid $white;
+  border-radius: 6px;
+  background-color: $white;
+  height: 100%;
 }

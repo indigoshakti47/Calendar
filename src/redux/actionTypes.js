@@ -1,0 +1,1 @@
+export const SET_APPOINTMENT = 'SET_APPOINTMENT';

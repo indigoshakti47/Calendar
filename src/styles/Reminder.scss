@@ -1,0 +1,32 @@
+@import 'variables.scss';
+
+.reminders-header-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 15px;
+    border-bottom: 1px solid $bg-gray;
+}
+.reminders-header{
+    color: $dark;
+}
+.open-close {
+    color: $primary;
+    span{
+        margin-right: 5px;
+    }
+}
+.reminder-title-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 15px;
+}
+.reminder-title{
+    color: $dark;
+}
+.reminder-details{
+    color: $dark;
+    margin: 0 15px;
+    font-size: 13px;
+
+
+}

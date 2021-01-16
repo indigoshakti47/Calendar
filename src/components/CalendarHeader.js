@@ -4,7 +4,7 @@ import '../styles/Calendar.scss'
 export default function CalendarHeader({ children }) {
     return (
         <div className="calendar-header">
-            <h3>
+            <h3 className="weekdays">
             {children}
             </h3>
         </div>
