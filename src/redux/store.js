@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 import reducer from './reducer';
 
 const initialStore = {
-  appointments: {}
+  appointments: {},
+  globalCity: {}
 };
 
 export const store = createStore(

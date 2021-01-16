@@ -1,0 +1,13 @@
+@import 'variables.scss';
+
+.react-autosuggest__input{
+    min-height: 40px;
+    width: 98%;
+    border: 1px solid $white;
+    border: none;
+    border-radius: 6px;
+    padding-left: 15px;
+    &:focus{
+        outline: none;
+    }
+}

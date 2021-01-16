@@ -4,14 +4,14 @@ const geocoderApi = axios.create({
   baseURL: "http://api.openweathermap.org/geo/1.0",
 });
 
-export const getCityData = async (citySlug) => {
+export const getCities = async (citySlug) => {
   const data = await geocoderApi.get("direct", {
     params: {
       q: citySlug,
       appid: process.env.REACT_APP_API_KEY,
-      limit: 1,
+      limit: 5,
     },
   });
 
-  return data.data[0];
-};
+  return data.data
+}

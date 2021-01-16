@@ -1,15 +1,24 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { setGlobalCity } from './redux/actions';
 import Calendar from "./components/Calendar.js";
 import Reminders from "./components/Reminders";
+import City from "./components/City";
 import "./styles/Calendar.scss";
 import "./styles/App.scss";
 
-function App() {
+function App({ setGlobalCity }) {
+
   return (
     <div className="App">
-      <div class="row">
-        <div class="double-column">
-          <div class="calendar-column">
+      <div className="row">
+        <div className="double-column">
+          <div className="calendar-column">
+            <City onSelectCity={setGlobalCity} />
+          </div>
+          <div className="calendar-column">
             <header className="App-header">
               <p className="container">
                 <Calendar />
@@ -17,8 +26,8 @@ function App() {
             </header>
           </div>
         </div>
-        <div class="column">
-          <div class="reminders-column">
+        <div className="column">
+          <div className="reminders-column">
             <Reminders />
           </div>
         </div>
@@ -27,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { setGlobalCity })(App);

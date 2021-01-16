@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
+    "react-autosuggest": "^10.1.0",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.1",

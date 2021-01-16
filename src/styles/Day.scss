@@ -1,8 +1,19 @@
 .day {
-    background-color: red;
+    background-color: #cccccc;
     border: 1px solid blue;
     width: 80px;
     height: 80px;
     overflow: hidden;
     border-radius: 6px;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img {
+            width: 30px
+        }
+    }
+    &__title {
+        margin-left: 4px;
+    }
 }

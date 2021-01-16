@@ -3,7 +3,7 @@
 .App {
   background-color: $bg-gray;
   padding: 60px 60px;
-  height: 100vh;
+  min-height: 100vh;
 }
 .row {
   display: flex;
@@ -33,11 +33,12 @@
   border-radius: 6px;
   background-color: $white;
   height: 100%;
+  margin-bottom: 20px;
 }
 
 .reminders-column {
   border: 1px solid $white;
   border-radius: 6px;
   background-color: $white;
-  height: 100%;
+  height: 97%;
 }

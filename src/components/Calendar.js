@@ -1,137 +1,73 @@
 import React, { useState, useEffect } from "react";
-import CalendarHeader from "./CalendarHeader.js";
-import Day from "./Day.js";
-import "../styles/Calendar.scss";
-import { weekdays, months } from "../constants/Dates";
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-/**
- * Gets the number of days in a specific month.
- *
- * @param {number} month Integer -month.
- * @param {number} year Integer -year.
- *
- * @return {Date} A date with the number of days in the month.
- */
-function daysInMonth(month, year) {
-  return new Date(year, month + 1, 0).getDate();
-}
+import { getcityWeather } from '../apis/Weather'
+import { getDaystoSkip, getNextMonth, getLastMonth, getDaysInMonthArray } from '../utils/dateUtils';
+import CalendarHeader from "./CalendarHeader.js";
+import Day from "./Day.js";
+import "../styles/Calendar.scss";
+import { weekdays, months } from "../constants/Dates";
 
-/**
- * Creates an empty array with the size of the number of days in a given month
- *
- * @param {Date} date The date wanted to get the array going.
- *
- * @return {Array} An array with the number of days in a month.
- */
-function createDaysInMonthArray(date) {
-  return new Array(daysInMonth(date.getMonth(), date.getFullYear())).fill(null);
-}
-
-/**
- * Creates an empty array with the days that need to be skipped
- *
- * @param {Date} firstDay The day the month begins.
- *
- * @return {Array} An array with the number of days to skip.
- */
-function createDaysToSkipArray(firstDay) {
-  return new Array(firstDay.getDay() > 0 ? firstDay.getDay() - 1 : 6).fill(
-    null
-  );
-}
-
-export default function Calendar() {
+function Calendar({ globalCity }) {
   const [dateSelected, setDateSelected] = useState(new Date());
-  const [monthSelected, setMonthSelected] = useState("");
-
-  const days = createDaysInMonthArray(dateSelected);
-
-  const firstDay = new Date(
-    dateSelected.getFullYear(),
-    dateSelected.getMonth(),
-    1
-  );
-
-  const daysToSkip = createDaysToSkipArray(firstDay);
-
-  const month = months[dateSelected.getMonth()];
+  const [weather, setWeather] = useState([]);
 
   useEffect(() => {
-    setMonthSelected(month);
-  }, [month]);
+    getWeather();
+  }, [globalCity]);
 
-  /**
-   * Function to move to the next month of the calendar
-   */
-  function nextMonth() {
-    //Get the next month based upon the actual date.
-    const next = new Date(
-      dateSelected.getFullYear(),
-      dateSelected.getMonth() + 1,
-      1
-    );
-
-    //Date's data
-    setDateSelected(next);
-    setMonthSelected(next.getMonth());
+  const getWeather = async () => {
+    const weatherData = await getcityWeather(globalCity);
+    setWeather(weatherData)
   }
 
-  /**
-   * Function to go back one month in the calendar
-   */
-  function lastMonth() {
-    let last;
+  const days = getDaysInMonthArray(dateSelected);
 
-    //If the current month is January, go back to the previous year
-    if (dateSelected.getMonth() === 0)
-      last = new Date(
-        dateSelected.getFullYear() - 1,
-        dateSelected.getMonth() + 11,
-        1
-      );
-    else
-      last = new Date(
-        dateSelected.getFullYear(),
-        dateSelected.getMonth() - 1,
-        1
-      );
+  const daysToSkip = getDaystoSkip(dateSelected);
+  const moveToNextMonth = () => setDateSelected(getNextMonth(dateSelected));
 
-    //Set the dates data
-    setDateSelected(last);
-    setMonthSelected(last.getMonth());
-  }
+  const moveToLastMonth = () => setDateSelected(getLastMonth(dateSelected));
 
   return (
     <>
       <div className="calendar" >
         <FontAwesomeIcon
             icon={faChevronLeft}
-            onClick={lastMonth}
+            onClick={moveToLastMonth}
             className="hover-icon"
         />
         <div className="calendar__grid">
-          <h1 className="month">{`${monthSelected} ${dateSelected.getFullYear()}`}</h1>
+          <h1 className="month">{`${months[dateSelected.getMonth()]} ${dateSelected.getFullYear()}`}</h1>
           {weekdays.map((weekday) => (
             <CalendarHeader key={weekday}>{weekday}</CalendarHeader>
           ))}
-          {daysToSkip.map((_) => (
-            <p></p>
+          {daysToSkip.map((_, i) => (
+            <p key={i}></p>
           ))}
           {days.map((day, index) => (
-            <Day key={index}> {index + 1} </Day>
+            <Day
+              key={index}
+              weatherIcon={weather[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`]}
+            > {index + 1}</Day>
           ))}
         </div>
         <FontAwesomeIcon
           icon={faChevronRight}
-          onClick={nextMonth}
+          onClick={moveToNextMonth}
           className="hover-icon"
         />
       </div>
     </>
   );
 }
+
+const mapStateToProps = ({ globalCity }) => ({
+  globalCity
+});
+
+export default connect(mapStateToProps)(Calendar);
