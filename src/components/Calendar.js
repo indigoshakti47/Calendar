@@ -33,7 +33,7 @@ function createDaysInMonthArray(date) {
 }
 
 /**
- * Creates an empty array with the days needed to be skipped
+ * Creates an empty array with the days that need to be skipped
  *
  * @param {Date} firstDay The day the month begins.
  *

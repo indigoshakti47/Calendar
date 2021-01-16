@@ -1,32 +1,66 @@
-@import 'variables.scss';
+@import "variables.scss";
 
-.reminders-header-container{
-    display: flex;
-    justify-content: space-between;
-    margin: 3px 15px;
-    border-bottom: 1px solid $bg-gray;
+.reminders-header-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 3px 15px;
+  border-bottom: 1px solid $bg-gray;
 }
-.reminders-header{
-    color: $dark;
+.reminders-header {
+  color: $dark;
 }
 .open-close {
-    color: $primary;
-    span{
-        margin-right: 5px;
-    }
+  color: $primary;
+  span {
+    margin-right: 5px;
+  }
 }
-.reminder-title-container{
-    display: flex;
-    justify-content: space-between;
-    margin: 3px 15px;
+.quote-container {
+  justify-content: center;
 }
-.reminder-title{
-    color: $dark;
+.quote {
+   margin: 10px 0px;
 }
-.reminder-details{
-    color: $dark;
-    margin: 0 15px;
-    font-size: 13px;
-
-
+.reminder-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3px 15px;
+  a {
+    text-decoration: none;
+  }
+}
+.reminder-title {
+  color: $dark;
+}
+.reminder-details {
+  color: $dark;
+  margin: 0 15px;
+  font-size: 13px;
+}
+.small-icon {
+  margin: auto 5px;
+  font-size: 12px;
+  color: $primary;
+}
+blockquote::before {
+  content: open-quote;
+}
+blockquote::after {
+  content: close-quote;
+}
+blockquote {
+  quotes: "“" "”" "‘" "’";
+  color: darken($bg-gray, 30%);
+}
+.hover-text {
+  transition: .3s;
+  color: $primary;
+  font-size: 12px;
+  cursor: pointer;
+  will-change: transform;
+  &:hover {
+      color:  darken($primary, 10%);
+      transform: scale(1.05);
+  }
 }

@@ -3,6 +3,7 @@ import Accordion from "./Accordion";
 import "../styles/Reminder.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import MotivationalQuote from "./MotivationalQuote";
 
 const data = {
   today: "Coding callenge",
@@ -17,6 +18,11 @@ export default function Reminders() {
         <h5 className="open-close">
           <span>See more</span>
           <FontAwesomeIcon icon={faChevronDown} className="small-icon" />
+        </h5>
+      </div>
+      <div className="reminders-header-container quote-container">
+        <h5 className="quote">
+          <MotivationalQuote/>
         </h5>
       </div>
       <Accordion today={data.today} details={data.details} />

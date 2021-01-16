@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faChevronDown
+    faChevronDown, faCircle
   } from "@fortawesome/free-solid-svg-icons";
 
 const styles = {
@@ -17,8 +17,12 @@ export default class Accordion extends Component {
     super();
     this.state = {
       openAccordion: false,
+      clickled: true
     };
     this.toggle = this.toggle.bind(this);
+  }
+  changeTitle = () => {
+    this.setState({clickled: !this.state.clickled})
   }
   toggle() {
     this.setState({
@@ -31,13 +35,17 @@ export default class Accordion extends Component {
       : styles.closeAccordion;
     return (
       <div>
+          <div>  
         <a onClick={this.toggle} className="reminder-title-container">
-          <h4 className="reminder-title"> {this.props.today} </h4>
-          <h5 className="open-close">
-            <span>See details</span>
-            <FontAwesomeIcon icon={faChevronDown} className="small-icon" />
+          <h4 className="reminder-title"> 
+          <FontAwesomeIcon icon={faCircle} className="small-icon" />
+          {this.props.today} </h4>
+          <h5 className="open-close hover-text">
+            <span className="hover-text" onClick={this.changeTitle}>{this.state.clickled ? 'See details' : 'Hide details'}</span>
+            <FontAwesomeIcon icon={faChevronDown} className="small-icon hover-text" />
           </h5>
         </a>
+          </div>
         <p style={stateStyle} className="reminder-details">{this.props.details}</p>
       </div>
     );
