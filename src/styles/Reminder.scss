@@ -32,6 +32,7 @@
 }
 .reminder-title {
   color: $dark;
+  font-size: 14px;
 }
 .reminder-details {
   color: $dark;
@@ -56,7 +57,7 @@ blockquote {
 .hover-text {
   transition: .3s;
   color: $primary;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   will-change: transform;
   &:hover {

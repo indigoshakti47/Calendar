@@ -15,10 +15,6 @@ export default function Reminders() {
     <div>
       <div className="reminders-header-container">
         <h3 className="reminders-header">Reminders</h3>
-        <h5 className="open-close">
-          <span>See more</span>
-          <FontAwesomeIcon icon={faChevronDown} className="small-icon" />
-        </h5>
       </div>
       <div className="reminders-header-container quote-container">
         <h5 className="quote">

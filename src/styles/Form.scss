@@ -1,13 +1,56 @@
-@import 'variables.scss';
+@import "variables.scss";
 
-.react-autosuggest__input{
+.react-autosuggest {
+  &__input {
     min-height: 40px;
     width: 98%;
     border: 1px solid $white;
     border: none;
     border-radius: 6px;
     padding-left: 15px;
-    &:focus{
-        outline: none;
+    &:focus {
+      outline: none;
     }
+  }
+  &__container {
+    position: relative;
+  }
+  &__suggestions-container {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: $white;
+    box-shadow: 0px 5px 10px lighten($dark, 60%);
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  &__suggestion {
+    list-style: none;
+    font-size: 14px;
+    padding: 10px 15px;
+    &:hover {
+      cursor: pointer;
+      color: $primary;
+      background-color: $bg-gray;
+    }
+  }
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  input {
+    height: 30px;
+    margin-top: 5px;
+    border: 1px solid $bg-gray;
+    border-radius: 6px;
+  }
 }

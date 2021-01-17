@@ -15,14 +15,12 @@ function App({ setGlobalCity }) {
     <div className="App">
       <div className="row">
         <div className="double-column">
-          <div className="calendar-column">
-            <City onSelectCity={setGlobalCity} />
-          </div>
+          <City onSelectCity={setGlobalCity} />
           <div className="calendar-column">
             <header className="App-header">
-              <p className="container">
+              <section className="container">
                 <Calendar />
-              </p>
+              </section>
             </header>
           </div>
         </div>

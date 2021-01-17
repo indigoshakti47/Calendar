@@ -6,14 +6,16 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { openDay } from '../redux/actions';
 import { getcityWeather } from '../apis/Weather'
 import { getDaystoSkip, getNextMonth, getLastMonth, getDaysInMonthArray } from '../utils/dateUtils';
 import CalendarHeader from "./CalendarHeader.js";
+import EventModal from "./EventModal";
 import Day from "./Day.js";
 import "../styles/Calendar.scss";
 import { weekdays, months } from "../constants/Dates";
 
-function Calendar({ globalCity }) {
+function Calendar({ globalCity, openDay }) {
   const [dateSelected, setDateSelected] = useState(new Date());
   const [weather, setWeather] = useState([]);
 
@@ -35,6 +37,7 @@ function Calendar({ globalCity }) {
 
   return (
     <>
+      <EventModal/>
       <div className="calendar" >
         <FontAwesomeIcon
             icon={faChevronLeft}
@@ -53,6 +56,7 @@ function Calendar({ globalCity }) {
             <Day
               key={index}
               weatherIcon={weather[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`]}
+              onDayClick={() => openDay({})}
             > {index + 1}</Day>
           ))}
         </div>
@@ -70,4 +74,4 @@ const mapStateToProps = ({ globalCity }) => ({
   globalCity
 });
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps, { openDay })(Calendar);

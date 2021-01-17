@@ -1,6 +1,7 @@
+@import 'variables.scss';
 .day {
     background-color: #cccccc;
-    border: 1px solid blue;
+    border: 1px solid $primary;
     width: 80px;
     height: 80px;
     overflow: hidden;
@@ -16,4 +17,9 @@
     &__title {
         margin-left: 4px;
     }
+}
+.reminder-calendar{
+    font-size: 10px;
+    color: lighten($dark, 20%);
+    margin: 1px;
 }

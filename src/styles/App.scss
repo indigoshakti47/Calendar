@@ -4,6 +4,7 @@
   background-color: $bg-gray;
   padding: 60px 60px;
   min-height: 100vh;
+  color: $dark;
 }
 .row {
   display: flex;
@@ -33,7 +34,7 @@
   border-radius: 6px;
   background-color: $white;
   height: 100%;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .reminders-column {

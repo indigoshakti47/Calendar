@@ -3,7 +3,8 @@ import reducer from './reducer';
 
 const initialStore = {
   appointments: {},
-  globalCity: {}
+  globalCity: {},
+  openedDay: null
 };
 
 export const store = createStore(

@@ -4,15 +4,15 @@ import '../styles/Reminder.scss'
 
 export default function MotivationalQuote() {
 
-    const [motivationalQuote, setMotivationalQuote] = useState("");
+  const [motivationalQuote, setMotivationalQuote] = useState("");
 
-    useEffect(() => {
-      getQuoteData().then(res => setMotivationalQuote(res.content));
-    }, [])
+  useEffect(() => {
+    getQuoteData().then(res => setMotivationalQuote(res.content));
+  }, [])
 
-    return (
-        <div>
-             <blockquote>{motivationalQuote}</blockquote>
-        </div>
-    )
+  return (
+    <div>
+      <blockquote>{motivationalQuote}</blockquote>
+    </div>
+  )
 }
