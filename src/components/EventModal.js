@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import City from './City'
 import { openList, closeDay, addAppointment } from "../redux/actions";
+import { slugTimeToHuman } from '../utils/dateUtils';
+
+import City from './City'
 import ColorPicker from "./ColorPicker";
 import Input from "./Input";
 import Time from "./Time";
@@ -52,7 +54,7 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
         <div className="modal__backdrop" onClick={closeDayModal}></div>
         <div className="modal__dialog">
           <div className="modal__header">
-            <h2>Add event for {`${openedDay}`}</h2>
+            <h2>Add reminder on {`${slugTimeToHuman(openedDay)}`}</h2>
             <a className="hover-text" onClick={openEventsModal}>
               Show all
             </a>

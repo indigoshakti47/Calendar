@@ -20,10 +20,12 @@
   &__dialog {
     width: 400px;
     max-width: 95%;
+    max-height: 80vh;
     background: $white;
     border-radius: 6px;
     padding: 15px 25px;
     box-shadow: 0 0 15px #0000009e;
+    overflow: scroll;
   }
   &__header {
     display: flex;
@@ -49,7 +51,39 @@
     display: flex;
   }
 }
-.event-container {
+.event {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  &__time {
+    font-size: 13px;
+    margin-top: -5px;
+    display:block;
+  }
+  &__container {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid $dark;
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+  .small-icon {
+    margin-right: 7px;
+    margin-left: 0;
+  }
+  .delete-button {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    transition: .3s;
+    &:hover {
+      opacity: .8;
+    }
+  }
 }

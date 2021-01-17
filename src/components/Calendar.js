@@ -6,9 +6,9 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { openDay } from '../redux/actions';
+import { openList } from '../redux/actions';
 import { getcityWeather } from '../apis/Weather'
-import { getDaystoSkip, getNextMonth, getLastMonth, getDaysInMonthArray } from '../utils/dateUtils';
+import { getDaystoSkip, getNextMonth, getLastMonth, getDaysInMonthArray, getDayColor } from '../utils/dateUtils';
 import CalendarHeader from "./CalendarHeader.js";
 import EventModal from "./EventModal";
 import EventListModal from "./EventListModal";
@@ -16,10 +16,9 @@ import Day from "./Day.js";
 import "../styles/Calendar.scss";
 import { weekdays, months } from "../constants/Dates";
 
-function Calendar({ globalCity, openDay }) {
+function Calendar({ globalCity, openList, appointments }) {
   const [dateSelected, setDateSelected] = useState(new Date());
   const [weather, setWeather] = useState([]);
-
   const today = new Date();
   
   useEffect(() => {
@@ -29,21 +28,6 @@ function Calendar({ globalCity, openDay }) {
   const getWeather = async () => {
     const weatherData = await getcityWeather(globalCity);
     setWeather(weatherData);
-  }
-
-  const dayColor = (today, dateSelected, calendarDay) => {
-
-    const dateToCompareToToday = new Date(dateSelected.getFullYear(), dateSelected.getMonth(), calendarDay);
-    const todayFormated = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-    if(todayFormated > dateToCompareToToday) return "#ffe6f2"
-    else if(todayFormated < dateToCompareToToday) return "#ccffe6"
-    
-    return "#cce6ff" 
-  }
-
-  const openDayModal = (day) => {
-    openDay(`${day}`);
   }
 
   const days = getDaysInMonthArray(dateSelected);
@@ -74,9 +58,10 @@ function Calendar({ globalCity, openDay }) {
           {days.map((_, index) => (
             <Day
               key={index}
-              color={dayColor(today, dateSelected, index + 1)}
+              color={getDayColor(today, dateSelected, index + 1)}
               weatherIcon={weather[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`]}
-              onDayClick={() => openDayModal(`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`)}
+              onDayClick={() => openList(`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index + 1}`)}
+              appointments={appointments[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index + 1}`]}
             > {index + 1}</Day>
           ))}
         </div>
@@ -90,8 +75,9 @@ function Calendar({ globalCity, openDay }) {
   );
 }
 
-const mapStateToProps = ({ globalCity }) => ({
-  globalCity
+const mapStateToProps = ({ globalCity, appointments }) => ({
+  globalCity,
+  appointments
 });
 
-export default connect(mapStateToProps, { openDay })(Calendar);
+export default connect(mapStateToProps, { openList })(Calendar);

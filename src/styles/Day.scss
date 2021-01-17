@@ -6,6 +6,9 @@
     height: 80px;
     overflow: hidden;
     border-radius: 6px;
+    &:hover{
+        cursor: pointer;
+    }
     &__header {
         display: flex;
         justify-content: space-between;
@@ -17,9 +20,13 @@
     &__title {
         margin-left: 4px;
     }
-}
-.reminder-calendar{
-    font-size: 10px;
-    color: lighten($dark, 20%);
-    margin: 1px;
+    &__reminder {
+        font-size: 10px;
+        color: $white;
+        margin: 1px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border-radius: 2px;
+    }
 }

@@ -4,13 +4,14 @@ import "../styles/Reminder.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import MotivationalQuote from "./MotivationalQuote";
+import '../styles/Day.scss'
 
 const data = {
-  today: "Coding callenge",
+  today: "Coding challenge",
   details:
     "You need to create a calendar from scratch and do some other things with a weather API",
 };
-export default function Reminders() {
+export default function Reminders({ children, color, weatherIcon, onDayClick, appointments }) {
   return (
     <div>
       <div className="reminders-header-container">
@@ -21,7 +22,9 @@ export default function Reminders() {
           <MotivationalQuote/>
         </h5>
       </div>
-      <Accordion today={data.today} details={data.details} />
+      <Accordion today={appointments && appointments.map(
+            ({ color, title }, i) => <p key={i} className="day__reminder" style={{ background: color }}>{title}</p>
+            )} details={data.details} />
     </div>
   );
 }
