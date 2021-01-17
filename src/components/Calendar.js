@@ -11,6 +11,7 @@ import { getcityWeather } from '../apis/Weather'
 import { getDaystoSkip, getNextMonth, getLastMonth, getDaysInMonthArray } from '../utils/dateUtils';
 import CalendarHeader from "./CalendarHeader.js";
 import EventModal from "./EventModal";
+import EventListModal from "./EventListModal";
 import Day from "./Day.js";
 import "../styles/Calendar.scss";
 import { weekdays, months } from "../constants/Dates";
@@ -18,7 +19,6 @@ import { weekdays, months } from "../constants/Dates";
 function Calendar({ globalCity, openDay }) {
   const [dateSelected, setDateSelected] = useState(new Date());
   const [weather, setWeather] = useState([]);
-  const [showDayModal, setShowDayModal] = useState(false)
 
   const today = new Date();
   
@@ -28,7 +28,7 @@ function Calendar({ globalCity, openDay }) {
 
   const getWeather = async () => {
     const weatherData = await getcityWeather(globalCity);
-    setWeather(weatherData)
+    setWeather(weatherData);
   }
 
   const dayColor = (today, dateSelected, calendarDay) => {
@@ -43,8 +43,7 @@ function Calendar({ globalCity, openDay }) {
   }
 
   const openDayModal = (day) => {
-    setShowDayModal(true);
-    openDay(`${day} ${months[dateSelected.getMonth()]} ${dateSelected.getFullYear()}`);
+    openDay(`${day}`);
   }
 
   const days = getDaysInMonthArray(dateSelected);
@@ -56,7 +55,8 @@ function Calendar({ globalCity, openDay }) {
 
   return (
     <>
-      <EventModal showDayModal={showDayModal} setShowDayModal={setShowDayModal} />
+      <EventListModal />
+      <EventModal />
       <div className="calendar" >
         <FontAwesomeIcon
             icon={faChevronLeft}
@@ -76,7 +76,7 @@ function Calendar({ globalCity, openDay }) {
               key={index}
               color={dayColor(today, dateSelected, index + 1)}
               weatherIcon={weather[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`]}
-              onDayClick={() => openDayModal(index + 1)}
+              onDayClick={() => openDayModal(`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`)}
             > {index + 1}</Day>
           ))}
         </div>

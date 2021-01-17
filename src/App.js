@@ -14,7 +14,7 @@ function App({ setGlobalCity }) {
     <div className="App">
       <div className="row">
         <div className="double-column">
-          <City onSelectCity={setGlobalCity} />
+          <City onChange={setGlobalCity} />
           <div className="calendar-column">
             <header className="App-header">
               <section className="container">

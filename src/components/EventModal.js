@@ -1,43 +1,54 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { closeDay } from "../redux/actions";
-import EventsModal from "./EventsModal";
+import City from './City'
+import { openList, closeDay, addAppointment } from "../redux/actions";
 import ColorPicker from "./ColorPicker";
 import Input from "./Input";
 import Time from "./Time";
 import "../styles/EventModal.scss";
 
-function EventModal({ openedDay, closeDay, showDayModal, setShowDayModal }) {
-  const [showEventsModal, setShowEventsModal] = useState(false);
-
+function EventModal({ openedDay, closeDay, addAppointment, openList }) {
   const [eventData, setEventData] = useState({
     title: "",
     description: "",
     city: "",
-    time: "",
+    time: "11:47",
+    color: ""
   });
 
   const openEventsModal = () => {
-    setShowDayModal(false);
-    setShowEventsModal(true);
-  };
+    openList(openedDay);
+    closeDayModal();
+  }
 
   const closeDayModal = () => {
     setEventData({ title: "", description: "", city: "", time: "" });
     closeDay(null);
-    setShowDayModal(false);
   };
+
+  const handleChange = ({ target }) => {
+    setEventData({
+      ...eventData,
+      [target.name]: target.value
+    })
+  }
+
+  const handleCustomChange = (prop) => (data) => {
+    setEventData({
+      ...eventData,
+      [prop]: data
+    })
+  }
+
+  const createAppointment = () => {
+    addAppointment(openedDay, eventData);
+    closeDayModal();
+  }
 
   return (
     <>
-      <EventsModal
-        showEventsModal={showEventsModal}
-        setShowEventsModal={setShowEventsModal}
-        showDayModal={showDayModal}
-        setShowDayModal={setShowDayModal}
-      />
-      <div className={`modal ${showDayModal ? "show" : ""}`}>
+      <div className={`modal ${!!openedDay ? "show" : ""}`}>
         <div className="modal__backdrop" onClick={closeDayModal}></div>
         <div className="modal__dialog">
           <div className="modal__header">
@@ -48,23 +59,27 @@ function EventModal({ openedDay, closeDay, showDayModal, setShowDayModal }) {
           </div>
           <Input
             name="Title"
-            eventData={eventData}
-            setEventData={setEventData}
+            value={eventData['title']}
+            onChange={handleChange}
           />
           <Input
             name="Description"
-            eventData={eventData}
-            setEventData={setEventData}
+            value={eventData['description']}
+            onChange={handleChange}
           />
           <Input
             name="City"
-            eventData={eventData}
-            setEventData={setEventData}
+            as={City}
+            onChange={handleCustomChange('city')}
           />
           <div className="modal__double-column">
-            {/* <Input name="Time" /> */}
-            <Time name="Time" />
-            <ColorPicker />
+            <Input as={Time} name="Time" onChange={handleCustomChange('time')} />
+            <ColorPicker value={eventData['color']} onChange={handleCustomChange('color')} />
+          </div>
+          <div>
+            <button className="submit-btn" onClick={createAppointment}>
+             Create
+            </button>
           </div>
         </div>
       </div>
@@ -76,4 +91,4 @@ const mapStateToProps = ({ openedDay }) => ({
   openedDay,
 });
 
-export default connect(mapStateToProps, { closeDay })(EventModal);
+export default connect(mapStateToProps, { openList, closeDay, addAppointment })(EventModal);

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/ColorPicker.scss';
 
-export default function ColorPicker() {
+export default function ColorPicker({ value, onChange }) {
   const colors = ['#6DA4CC','#6DCCAF','#AF6DCC','#CCBD6D','#CC6D87' ];
   return (
     <div className="color-picker">
@@ -10,8 +10,9 @@ export default function ColorPicker() {
         {
           colors.map((color) => (
             <span
+              onClick={() => onChange(color)}
               key={color}
-              className="color-picker__item"
+              className={`color-picker__item ${color === value ? 'active': ''}`}
               style={{ background: color }}>
               </span>
           ))

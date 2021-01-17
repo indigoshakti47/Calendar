@@ -38,7 +38,7 @@ export default class City extends Component {
   };
 
   selectedSuggestion = (event, value) => {
-    this.props.onSelectCity(value.suggestion);
+    this.props.onChange(value.suggestion);
   }
 
   render() {
