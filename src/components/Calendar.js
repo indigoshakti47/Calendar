@@ -18,7 +18,10 @@ import { weekdays, months } from "../constants/Dates";
 function Calendar({ globalCity, openDay }) {
   const [dateSelected, setDateSelected] = useState(new Date());
   const [weather, setWeather] = useState([]);
+  const [showDayModal, setShowDayModal] = useState(false)
 
+  const today = new Date();
+  
   useEffect(() => {
     getWeather();
   }, [globalCity]);
@@ -26,6 +29,22 @@ function Calendar({ globalCity, openDay }) {
   const getWeather = async () => {
     const weatherData = await getcityWeather(globalCity);
     setWeather(weatherData)
+  }
+
+  const dayColor = (today, dateSelected, calendarDay) => {
+
+    const dateToCompareToToday = new Date(dateSelected.getFullYear(), dateSelected.getMonth(), calendarDay);
+    const todayFormated = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    if(todayFormated > dateToCompareToToday) return "#ffe6f2"
+    else if(todayFormated < dateToCompareToToday) return "#ccffe6"
+    
+    return "#cce6ff" 
+  }
+
+  const openDayModal = (day) => {
+    setShowDayModal(true);
+    openDay(`${day} ${months[dateSelected.getMonth()]} ${dateSelected.getFullYear()}`);
   }
 
   const days = getDaysInMonthArray(dateSelected);
@@ -37,7 +56,7 @@ function Calendar({ globalCity, openDay }) {
 
   return (
     <>
-      <EventModal/>
+      <EventModal showDayModal={showDayModal} setShowDayModal={setShowDayModal} />
       <div className="calendar" >
         <FontAwesomeIcon
             icon={faChevronLeft}
@@ -52,11 +71,12 @@ function Calendar({ globalCity, openDay }) {
           {daysToSkip.map((_, i) => (
             <p key={i}></p>
           ))}
-          {days.map((day, index) => (
+          {days.map((_, index) => (
             <Day
               key={index}
+              color={dayColor(today, dateSelected, index + 1)}
               weatherIcon={weather[`${dateSelected.getFullYear()}_${dateSelected.getMonth()}_${index}`]}
-              onDayClick={() => openDay({})}
+              onDayClick={() => openDayModal(index + 1)}
             > {index + 1}</Day>
           ))}
         </div>

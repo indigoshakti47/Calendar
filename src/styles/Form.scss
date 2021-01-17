@@ -54,3 +54,29 @@
     border-radius: 6px;
   }
 }
+
+.form-control {
+  &:focus {
+    outline: none;
+  }
+}
+
+.react-time-picker {
+  &__clock {
+    border-radius: 6px !important;
+    border: 1px solid $bg-gray !important;
+    margin-bottom: 15px;
+  }
+  &__wrapper {
+    border-radius: 6px;
+    border: 1px solid $bg-gray !important;
+    height: 40px;
+  }
+  &__button {
+    background-color: $bg-gray;
+  }
+  &__inputGroup{
+    margin-left: 5px;
+  }
+
+}
