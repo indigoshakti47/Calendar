@@ -22,9 +22,7 @@ export default function Reminders({ children, color, weatherIcon, onDayClick, ap
           <MotivationalQuote/>
         </h5>
       </div>
-      <Accordion today={appointments && appointments.map(
-            ({ color, title }, i) => <p key={i} className="day__reminder" style={{ background: color }}>{title}</p>
-            )} details={data.details} />
+      <Accordion today={data.today} details={data.details} />
     </div>
   );
 }

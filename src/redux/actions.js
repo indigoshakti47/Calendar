@@ -6,6 +6,7 @@
   ADD_APPOINTMENT,
   DELETE_APPOINTMENT,
   EDIT_APPOINTMENT,
+  DELETE_ALL_APPOINTMENTS
 } from './actionTypes';
 
 export const setGlobalCity = (city) => ({
@@ -35,6 +36,11 @@ export const openList = (day) => ({
 export const deleteAppointment = (day, index) => ({
   type: DELETE_APPOINTMENT,
   payload: { day, index }
+})
+
+export const deleteAllAppointments = (day) => ({
+  type: DELETE_ALL_APPOINTMENTS,
+  payload: { day }
 })
 
 export const editAppointment = (day, index, key, value) => ({

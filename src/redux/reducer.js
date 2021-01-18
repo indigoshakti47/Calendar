@@ -6,73 +6,87 @@ import {
   OPEN_LIST,
   DELETE_APPOINTMENT,
   EDIT_APPOINTMENT,
-} from './actionTypes';
+  DELETE_ALL_APPOINTMENTS,
+} from "./actionTypes";
 
 export default function reducer(state, action) {
   switch (action.type) {
     case SET_GLOBAL_CITY:
       return {
         ...state,
-        globalCity: action.payload
-      }
+        globalCity: action.payload,
+      };
     case OPEN_DAY:
       return {
         ...state,
-        openedDay: action.payload
-      }
+        openedDay: action.payload,
+      };
     case OPEN_LIST:
       return {
         ...state,
-        openedList: action.payload
-      }
+        openedList: action.payload,
+      };
     case CLOSE_DAY:
       return {
         ...state,
-        openedDay: null
-      }
-    case ADD_APPOINTMENT:{
+        openedDay: null,
+      };
+    case ADD_APPOINTMENT: {
       const { appointments } = state;
       const { day, appointment } = action.payload;
-      appointments[day] = [
-        ...(appointments[day] || []),
-        appointment
-      ];
-      localStorage.setItem('appointments', JSON.stringify(appointments));
+      appointments[day] = [...(appointments[day] || []), appointment];
+      localStorage.setItem("appointments", JSON.stringify(appointments));
       return {
         ...state,
         appointments: {
-          ...appointments
+          ...appointments,
         },
-      }
+      };
     }
     case DELETE_APPOINTMENT: {
       const { day, index } = action.payload;
       const { appointments } = state;
-      
-      appointments[day] = appointments[day].filter((appointment, i) => i !== index );
-      localStorage.setItem('appointments', JSON.stringify(appointments));
+
+      appointments[day] = appointments[day].filter(
+        (appointment, i) => i !== index
+      );
+      localStorage.setItem("appointments", JSON.stringify(appointments));
       return {
         ...state,
         appointments: {
-          ...appointments
+          ...appointments,
         },
       };
     }
+
+    case DELETE_ALL_APPOINTMENTS: {
+      const { appointments } = state;
+
+      appointments[action.payload.day] = [];
+      localStorage.setItem("appointments", JSON.stringify(appointments));
+      return {
+        ...state,
+        appointments: {
+          ...appointments,
+        },
+      };
+    }
+
     case EDIT_APPOINTMENT: {
       const { day, index, key, value } = action.payload;
       const { appointments } = state;
-      
+
       appointments[day] = appointments[day].map((appointment, i) => {
         if (i === index) {
           appointment[key] = value;
         }
         return appointment;
       });
-      localStorage.setItem('appointments', JSON.stringify(appointments));
+      localStorage.setItem("appointments", JSON.stringify(appointments));
       return {
         ...state,
         appointments: {
-          ...appointments
+          ...appointments,
         },
       };
     }

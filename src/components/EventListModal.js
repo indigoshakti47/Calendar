@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import { openDay, openList } from "../redux/actions";
+import { openDay, openList , deleteAllAppointments } from "../redux/actions";
 import { slugTimeToHuman } from '../utils/dateUtils';
 import Event from './Event'
 import "../styles/EventModal.scss";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrashAlt,
-  faCircle,
-  faMapMarkerAlt,
-} from "@fortawesome/free-solid-svg-icons";
-
-function EventListModal({ openedList, openDay, openList, appointments }) {
+function EventListModal({ openedList, openDay, openList, appointments , deleteAllAppointments }) {
   function openDayModal() {
     openDay(openedList);
     openList(null);
@@ -32,11 +25,13 @@ function EventListModal({ openedList, openDay, openList, appointments }) {
             Add reminder
           </a>
         </div>
+        <button onClick={()=> deleteAllAppointments(openedList)}>Delete all</button>
         {
           dayAppointments && dayAppointments.length ?
           dayAppointments.map((appointment, i) => <Event key={i} appointment={appointment} index={i} day={openedList} />) :
           <h4>Oops, looks like there are no planned reminders for {dayDate} , if you'd like, create one!</h4>
         }
+       
       </div>
     </div>
   );
@@ -47,4 +42,4 @@ const mapStateToProps = ({ openedList, appointments }) => ({
   appointments
 });
 
-export default connect(mapStateToProps, { openDay, openList })(EventListModal);
+export default connect(mapStateToProps, { openDay, openList , deleteAllAppointments })(EventListModal);
