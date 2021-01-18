@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 import { getCities } from '../apis/Geocoder'
 import '../styles/Form.scss'
-
-const cities = [];
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronDown,
+  faCircle,
+  faTrashAlt,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const getSuggestions = (value) => {
-  const inputLength = value.length;
 
   return value.length === 0
     ? Promise.resolve([])
@@ -37,19 +41,20 @@ export default class City extends Component {
     });
   };
 
-  selectedSuggestion = (event, value) => {
+  selectedSuggestion = (_, value) => {
     this.props.onChange(value.suggestion);
   }
 
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Select a city",
+      placeholder: "Don't get caught off guard, select a city to see what the forecasted weather will be like in the upcoming days",
       value,
       onChange: this.onChange,
     };
     return (
       <div>
+       
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -57,8 +62,14 @@ export default class City extends Component {
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
-          onSuggestionSelected={this.selectedSuggestion}
-        />
+          onSuggestionSelected={this.selectedSuggestion}>
+             <FontAwesomeIcon
+                icon={faChevronDown}
+                className="small-icon hover-text"
+              />
+
+          </Autosuggest>
+        
       </div>
     );
   }

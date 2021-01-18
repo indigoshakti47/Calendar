@@ -25,7 +25,7 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
   }
 
   const closeDayModal = () => {
-    setEventData({ title: "", description: "", city: "", time: "" });
+    setEventData({ ...eventData, title: "", description: "", time: "11:47", color: "" });
     closeDay(null);
   };
 
@@ -43,9 +43,16 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
     })
   }
 
+  const checkValidation = () => {
+    const required = ['title', 'description', 'city', 'time', 'color'];
+    return required.some(key => eventData[key] === '');
+  }
+  
   const createAppointment = () => {
-    addAppointment(openedDay, eventData);
-    closeDayModal();
+    if(!checkValidation()){
+      addAppointment(openedDay, eventData);
+      closeDayModal();
+    } else alert('You must fill all the data.')
   }
 
   return (
@@ -71,11 +78,12 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
           />
           <Input
             name="City"
+            value={eventData['city']}
             as={City}
             onChange={handleCustomChange('city')}
           />
           <div className="modal__double-column">
-            <Input as={Time} name="Time" onChange={handleCustomChange('time')} />
+            <Input as={Time} value={eventData['time']} name="Time" onChange={handleCustomChange('time')} />
             <ColorPicker value={eventData['color']} onChange={handleCustomChange('color')} />
           </div>
           <div>

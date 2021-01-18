@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import TimePicker from 'react-time-picker'
 
 export default function Time({ onChange, value, name }) {

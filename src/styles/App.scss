@@ -2,9 +2,12 @@
 
 .App {
   background-color: $bg-gray;
-  padding: 60px 60px;
+  padding: 10px 60px;
   min-height: 100vh;
   color: $dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .row {
   display: flex;
@@ -41,5 +44,6 @@
   border: 1px solid $white;
   border-radius: 6px;
   background-color: $white;
-  height: 97%;
+  max-height: 678px;
+  overflow-y: auto;
 }

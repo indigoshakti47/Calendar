@@ -30,9 +30,13 @@ export const getLastMonth = (date) => {
   return new Date(date.getFullYear(), date.getMonth() - 1, 1);
 }
 
+export const formatToday = (today) => {
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+}
+
 export const getDayColor = (today, dateSelected, calendarDay) => {
   const dateToCompareToToday = new Date(dateSelected.getFullYear(), dateSelected.getMonth(), calendarDay);
-  const todayFormated = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const todayFormated = formatToday(today);
 
   if(todayFormated > dateToCompareToToday) return "#ffe6f2"
   else if(todayFormated < dateToCompareToToday) return "#ccffe6"
@@ -42,6 +46,12 @@ export const getDayColor = (today, dateSelected, calendarDay) => {
 
 export const slugTimeToHuman = (slugTime) => {
   if (typeof slugTime !== 'string') return '';
-  const [year, month, day] = slugTime.split('_');
+  const slugTimeSplit = slugTime.split('_');
+  const month = slugTimeSplit[1];
+  const day = slugTimeSplit[2]
   return `${months[month]} ${day}`;
+}
+
+export const getDate = (year, month, day) => {
+  return new Date(year, month, day);
 }

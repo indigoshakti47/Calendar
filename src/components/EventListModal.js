@@ -1,12 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { openDay, openList , deleteAllAppointments } from "../redux/actions";
-import { slugTimeToHuman } from '../utils/dateUtils';
-import Event from './Event'
+import { openDay, openList, deleteAllAppointments } from "../redux/actions";
+import { slugTimeToHuman } from "../utils/dateUtils";
+import Event from "./Event";
 import "../styles/EventModal.scss";
 
-function EventListModal({ openedList, openDay, openList, appointments , deleteAllAppointments }) {
+function EventListModal({
+  openedList,
+  openDay,
+  openList,
+  appointments,
+  deleteAllAppointments,
+}) {
   function openDayModal() {
     openDay(openedList);
     openList(null);
@@ -25,13 +31,30 @@ function EventListModal({ openedList, openDay, openList, appointments , deleteAl
             Add reminder
           </a>
         </div>
-        <button onClick={()=> deleteAllAppointments(openedList)}>Delete all</button>
-        {
-          dayAppointments && dayAppointments.length ?
-          dayAppointments.map((appointment, i) => <Event key={i} appointment={appointment} index={i} day={openedList} />) :
-          <h4>Oops, looks like there are no planned reminders for {dayDate} , if you'd like, create one!</h4>
-        }
-       
+        {dayAppointments && dayAppointments.length ? (
+          [
+            <button key={0} className="hover-text" onClick={() => deleteAllAppointments(openedList)}>
+              Delete all
+            </button>,
+            dayAppointments.map((appointment, i) => (
+              <Event
+                key={i}
+                appointment={appointment}
+                index={i}
+                day={openedList}
+              />
+            )),
+          ]
+        ) : (
+          <div>
+          <h5>
+            Oops, looks like there are no planned reminders for {dayDate} , if
+            you'd like, create one!
+          </h5>
+            <iframe className="gif" src="https://giphy.com/embed/XaExByjWTK1V2HgDfh"></iframe>
+          </div>
+          
+        )}
       </div>
     </div>
   );
@@ -42,4 +65,8 @@ const mapStateToProps = ({ openedList, appointments }) => ({
   appointments
 });
 
-export default connect(mapStateToProps, { openDay, openList , deleteAllAppointments })(EventListModal);
+export default connect(mapStateToProps, {
+  openDay,
+  openList,
+  deleteAllAppointments
+})(EventListModal);
