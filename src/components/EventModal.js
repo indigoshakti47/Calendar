@@ -70,13 +70,13 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
             name="Title"
             value={eventData['title']}
             onChange={handleChange}
-            maxLength={10}
+            maxLength={30}
           />
           <Input
             name="Description"
             value={eventData['description']}
             onChange={handleChange}
-            maxLength={30}
+            maxLength={50}
           />
           <Input
             name="City"
