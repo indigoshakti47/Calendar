@@ -65,3 +65,15 @@ blockquote {
       transform: scale(1.05);
   }
 }
+
+.reminders-column {
+  .event__container{
+    .event{
+      margin-bottom: 5px;
+    }
+    .event__time{
+      margin-bottom: 5px;
+    }
+  }
+
+}

@@ -61,6 +61,7 @@ export default class City extends Component {
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
+          onSuggestionsClearRequested={() => {}}
           inputProps={inputProps}
           onSuggestionSelected={this.selectedSuggestion}>
              <FontAwesomeIcon

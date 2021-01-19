@@ -31,11 +31,10 @@ function EventListModal({
             Add reminder
           </a>
         </div>
+        
         {dayAppointments && dayAppointments.length ? (
+          
           [
-            <button key={0} className="hover-text" onClick={() => deleteAllAppointments(openedList)}>
-              Delete all
-            </button>,
             dayAppointments.map((appointment, i) => (
               <Event
                 key={i}
@@ -44,6 +43,11 @@ function EventListModal({
                 day={openedList}
               />
             )),
+            <div class="delete-all-container">
+            <button key={0} className="delete-all" onClick={() => deleteAllAppointments(openedList)}>
+              Delete all
+            </button>
+            </div>
           ]
         ) : (
           <div>

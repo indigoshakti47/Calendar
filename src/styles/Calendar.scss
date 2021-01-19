@@ -6,7 +6,7 @@
 }
 .calendar {
     display: flex;
-    align-items: center;
+    // align-items: center;
     &__grid {
         display: grid;
         grid-template-columns: repeat(7,80px);
@@ -18,7 +18,7 @@
     font-size: 16px;
 }
 .hover-icon {
-    margin-top: 120px;
+    margin-top: 350px;
     transition: .3s;
     color: $primary;
     font-size: 38px;

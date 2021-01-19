@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AlertModal from './AlertModal';
 import '../styles/Form.scss';
 
-export default function Input({ name, value, onChange, as : Component  }) {
+export default function Input({ name, value, onChange, as : Component, ...props  }) {
 
   // const [showAlertModal, setShowAlertModal] = useState(false)
 
@@ -32,6 +32,7 @@ export default function Input({ name, value, onChange, as : Component  }) {
           className="form-control"
           value={value}
           onChange={onChange}
+          {...props}
         ></input>
         } 
      </div>

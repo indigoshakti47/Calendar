@@ -1,3 +1,24 @@
+In this project a calendar application demo was created using React. It has a full on navigation system and the ability to add, edit and delete reminders, which include: title, description, city, time and priority (Through a color coded system). Moreover, a weather API (Open Weather Map​) was used in order to bring in the forecasted weather of a given city that the user is prompted to select beforehand, by default the weather the API initially brings is that of Bogotá. 
+
+On the right side of the application we have an overall reminders column which includes a randomly generated motivational quote, as well as the reminders of the day and those of the upcoming (+3) days. 
+
+Every time the user adds in a reminder the title gets displayed on the calendar, however in order for them to see, edit or delete the remaining information they must select the day. For editing a reminder the user just needs to type in on top of the title or description and it will be saved automatically upon clicking elsewhere.
+
+Input validation ensures that only a limited number of characters are allowed and that required fields aren't empty before successfully creating a reminder. Aditionally, a confirmation modal was added to ensure that the user doesn't delete reminders accidentally. 
+
+Redux was used to handle the state of the calendar and no UI libraries were used. However react-time-picker came in handy when designing the time input, sweetalert2 when it came to displaying alert messages and react-autosuggest for the City selector. 
+
+In the README folder, under Mock-ups, the design concept developed using Adobe XD is shown. Although some minor variations from it were made, the end result which can be found under the 'Final version' folder includes several improvements such as color coding the present, past and future days. Furthermore, the result of the unit tests can be found under 'Tests'
+
+Now, as for running the project the three main considerations are:
+        1. In the root of the project a file called .env.local needs to be created and the API key included, for demonstration purposes the following key can be used: 
+
+                            REACT_APP_API_KEY=8544960acc2a9e67eceda4124dee2a33
+
+        2. Make sure to run npm install to install all dependencies. 
+        3. Have fun creating reminders and navigating through the calendar. 
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

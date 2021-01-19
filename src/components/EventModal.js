@@ -44,7 +44,7 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
   }
 
   const checkValidation = () => {
-    const required = ['title', 'description', 'city', 'time', 'color'];
+    const required = ['title', 'description'];
     return required.some(key => eventData[key] === '');
   }
   
@@ -70,11 +70,13 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
             name="Title"
             value={eventData['title']}
             onChange={handleChange}
+            maxLength={10}
           />
           <Input
             name="Description"
             value={eventData['description']}
             onChange={handleChange}
+            maxLength={30}
           />
           <Input
             name="City"
@@ -87,7 +89,7 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
             <ColorPicker value={eventData['color']} onChange={handleCustomChange('color')} />
           </div>
           <div>
-            <button className="submit-btn" onClick={createAppointment}>
+            <button className="submit-btn" name='submit' onClick={createAppointment}>
              Create
             </button>
           </div>
@@ -100,5 +102,7 @@ function EventModal({ openedDay, closeDay, addAppointment, openList }) {
 const mapStateToProps = ({ openedDay }) => ({
   openedDay,
 });
+
+export { EventModal as EventModalUnWrapped };
 
 export default connect(mapStateToProps, { openList, closeDay, addAppointment })(EventModal);
